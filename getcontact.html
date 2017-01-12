@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Student Info: Name=Ruchit Chokshi, ID=14452cr
+Subject: CourseNoCS557_HW_4_Fall_2015
+Author: Ruchit
+Filename: getcontact.html
+Date and Time: Nov 30, 2015 10:20:18 PM
+Project Name: HW_4
+-->
+<html>
+    <head>
+        <title>jQuery $.getJSON method with mysql</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-1.11.2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $.getJSON("getUsers", function(data) {
+                    $.each(data, function() {
+                        $.each(this, function(key, value) {
+                            $("#user").append(
+                                    "Last Name: " + value.LastName + "<br>" +
+                                    "First Name: " + value.FirstName + "<br><br>"
+                                    );
+                        });
+                    });
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+        <section id="user">
+
+        </section>    
+    </body>
+</html>
+

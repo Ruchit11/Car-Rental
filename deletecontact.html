@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+Student Info: Name=Ruchit Chokshi, ID=14452cr
+Subject: CourseNoCS557_HW_4_Fall_2015
+Author: Ruchit
+Filename: deletecontact.html
+Date and Time: Nov 30, 2015 10:19:31 PM
+Project Name: HW_4
+-->
+<html>
+    <head>
+        <title>NPU Student Club</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-1.11.2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#Search").click(function (event) {
+                    var emailAddress = $("#emailAddress").val();
+                    $.ajax({
+                        type: "get",
+                        url: "getUser",
+                        data: {emailAddress: emailAddress},
+                        timeout: 10000,
+                        cache: false,
+                        error: function (xhr, status, error) {
+                            alert("Error: " + xhr.status + " - " + error);
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            $("#userID").val(data[0].UserID);
+                            $("#firstName").val(data[0].FirstName);
+                            $("#lastName").val(data[0].LastName);
+                        }
+                    });
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+        <h1>Delete your contact information</h1>
+        <p>To delete, enter email address below. Then, click on the Search button. And then click Delete to confirm.</p>
+        <form action="postDeleteUser" method="post">
+            <table style="border-spacing: 2px; border-width: 1px">
+                <tr>
+                    <td>Email address:</td>
+                    <td><input type="text" id="emailAddress" name="emailAddress"></td>
+                    <td><input type="button" id="Search" name="Search" value="Search"></td>
+                </tr>
+                <tr>
+                    <td>User ID:</td>
+                    <td><input type="text" id="userID" name="userID" readonly></td>
+                </tr>
+                <tr>
+                    <td>First name:</td>
+                    <td><input type="text" id="firstName" name="firstName"  readonly></td>
+                </tr>
+                <tr>
+                    <td>Last name:</td>
+                    <td><input type="text" id="lastName" name="lastName"  readonly></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><br><input type="submit" value="Delete"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
